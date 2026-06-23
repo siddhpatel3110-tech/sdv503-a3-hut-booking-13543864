@@ -1,0 +1,17 @@
+{
+  "huts": [
+    {
+      "id": "ev0z63gf",
+      "name": "Mintaro Hut",
+      "walk": "Milford Track",
+      "capacity": 40
+    },
+    {
+      "id": "tpfc7pcz",
+      "name": "Routeburn Falls Hut",
+      "walk": "Routeburn Track",
+      "capacity": 48
+    }
+  ],
+  "bookings": []
+}
