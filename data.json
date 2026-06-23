@@ -13,5 +13,14 @@
       "capacity": 48
     }
   ],
-  "bookings": []
+  "bookings": [
+    {
+      "id": "s6ggsuj2",
+      "hutId": "ev0z63gf",
+      "tramperName": "John",
+      "arrivalDate": "2026-06-23",
+      "nights": 2,
+      "partySize": 4
+    }
+  ]
 }

@@ -46,9 +46,12 @@ function generateId() {
 
 function parseDate(str) {
   const [y, m, d] = str.split('-').map(Number);
-  const date = new Date(y, m - 1, d);
-  return isNaN(date.getTime()) ? null : date;
+  const date = new Date(Date.UTC(y, m - 1, d));
+
+  // Convert back to local date without timezone shift
+  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
 }
+
 
 // ---------------------- Validation ----------------------
 
@@ -56,11 +59,16 @@ function validateBookingInput({ name, hut, arrivalDate, nights, partySize }) {
   if (!name || name.trim() === '') return 'Tramper name cannot be empty.';
   if (!hut) return 'Selected hut does not exist.';
 
-  const date = parseDate(arrivalDate);
-  if (!date) return 'Invalid date format.';
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  if (date < today) return 'Arrival date is in the past.';
+const date = parseDate(arrivalDate.trim());
+if (!date) return 'Invalid date format.';
+
+// Fix: compare only Y/M/D, not time
+const today = new Date();
+const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+if (date.getTime() < todayOnly.getTime()) {
+  return 'Arrival date is in the past.';
+}
 
   if (!Number.isInteger(nights) || nights <= 0)
     return 'Nights must be a positive whole number.';
@@ -205,13 +213,13 @@ function occupancySummary(data) {
 async function main() {
   const data = loadData();
 
-  if (data.huts.length === 0) {
-    data.huts.push(
-      { id: generateId(), name: 'Mintaro Hut', walk: 'Milford Track', capacity: 40 },
-      { id: generateId(), name: 'Routeburn Falls Hut', walk: 'Routeburn Track', capacity: 48 }
-    );
-    saveData(data);
-  }
+ if (!data.huts || data.huts.length === 0) {
+  data.huts = [
+    { id: generateId(), name: 'Mintaro Hut', walk: 'Milford Track', capacity: 40 },
+    { id: generateId(), name: 'Routeburn Falls Hut', walk: 'Routeburn Track', capacity: 48 }
+  ];
+  saveData(data);
+}
 
   while (true) {
     console.log(`
