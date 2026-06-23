@@ -21,6 +21,22 @@
       "arrivalDate": "2026-06-23",
       "nights": 2,
       "partySize": 4
+    },
+    {
+      "id": "ijk050dm",
+      "hutId": "ev0z63gf",
+      "tramperName": "John",
+      "arrivalDate": "2026-06-23",
+      "nights": 2,
+      "partySize": 4
+    },
+    {
+      "id": "33dgdghg",
+      "hutId": "ev0z63gf",
+      "tramperName": "John",
+      "arrivalDate": "2026-06-23",
+      "nights": 2,
+      "partySize": 4
     }
   ]
 }

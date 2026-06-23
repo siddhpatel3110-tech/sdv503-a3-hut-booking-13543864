@@ -59,7 +59,7 @@ function validateBookingInput({ name, hut, arrivalDate, nights, partySize }) {
   if (!name || name.trim() === '') return 'Tramper name cannot be empty.';
   if (!hut) return 'Selected hut does not exist.';
 
-const date = parseDate(arrivalDate.trim());
+  const date = parseDate(arrivalDate.trim());
 if (!date) return 'Invalid date format.';
 
 // Fix: compare only Y/M/D, not time
